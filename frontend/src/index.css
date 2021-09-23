@@ -41,3 +41,10 @@ code {
 .f-300 {
   font-weight: 300; 
 }
+
+.complete-icon {
+  color: #4caf50
+}
+.hold-icon {
+  color: #ffc107
+}

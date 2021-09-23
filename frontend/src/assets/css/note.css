@@ -1,9 +1,7 @@
-.note__card {
-    padding: 10px;
+.note__wrap {
     background-color: #F5F5F4;
     display: flex;
     flex-direction: column;
-    flex: 0.2;
     min-width: 200px;
 }
 
@@ -49,6 +47,7 @@
     background-color: white;
     border-radius: 5px;
     padding: 3px;
+    padding-right: 8px;
 }
 
 .note_header__search > input {
@@ -56,4 +55,50 @@
     outline-width: 0;
     color: black;
     border: none;
+    width: 100vh;
 }
+
+.note__title {
+    padding: 10px 12px 10px 12px;
+}
+
+.note__body {
+    padding: 12px;
+    border: 2px solid transparent;
+}
+
+.note__body:hover {
+    background-color: #2E91F8;
+    color: white;
+    box-shadow: inset 0 0 8px rgb(45, 122, 204);
+    -moz-box-shadow:    inset 0 0 8px rgb(45, 122, 204);
+    -webkit-box-shadow: inset 0 0 8px rgb(45, 122, 204);
+}
+
+
+.note__body:hover > span {
+    color: white;
+}
+
+.note__body > div {
+    margin-bottom: 10px;
+}
+
+.note__body > p {
+    margin-bottom: 8px;
+}
+
+.note__body > span {
+    color: #2E91F8;
+    font-size: 12px;
+}
+
+.note__body_title {
+    display: flex;
+    align-items: center;
+}
+
+.note__body_title > .MuiSvgIcon-root {
+    margin-right: 8px;
+}
+

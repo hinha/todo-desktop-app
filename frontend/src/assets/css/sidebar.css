@@ -5,17 +5,6 @@
     background-color: #161A20;
 }
 
-.react-resizable {
-    position: relative;
-}
-
-.react-resizable-handle {
-    position: absolute;
-    cursor: e-resize;
-    width: 10px;
-    height: 100vh;
-    right: 0;
-}
 .sidebar__top {
     display: flex;
     justify-content: space-between;

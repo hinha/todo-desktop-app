@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../assets/css/note.css";
 import NoteHeader from "../components/notes/NoteHeader";
+import NoteBody from "../components/notes/NoteBody";
+
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import PauseCircleOutlineOutlinedIcon from "@material-ui/icons/PauseCircleOutlineOutlined";
+import { Resizable } from "react-resizable";
 
 const Trash = () => {
+  const [widthSidebar, setWidthSidebar] = useState(400);
+
+  const onResize = (event, { size }) => {
+    setWidthSidebar(size.width);
+  };
+
   return (
-    <div className="note__card">
-      <NoteHeader title="Trash" />
-    </div>
+    <>
+      <Resizable
+        width={widthSidebar}
+        height={0}
+        onResize={onResize}
+        minConstraints={[300, 200]}
+        maxConstraints={[800, 300]}
+      >
+        <div className="note__wrap" style={{ flexBasis: `${widthSidebar}px` }}>
+          <div className="note__title">
+            <NoteHeader title="Trash" />
+            <div className="note_header__search">
+              <SearchOutlinedIcon />
+              <input placeholder="Search" />
+            </div>
+          </div>
+
+          <NoteBody
+            title="Contoh 1"
+            description="lorem"
+            updateSpan="1 days"
+            icon={<PauseCircleOutlineOutlinedIcon className="hold-icon" />}
+          />
+        </div>
+      </Resizable>
+      <div className="react-resizable"></div>
+    </>
   );
 };
 
