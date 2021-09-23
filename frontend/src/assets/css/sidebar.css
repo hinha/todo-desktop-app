@@ -12,7 +12,7 @@
 .react-resizable-handle {
     position: absolute;
     cursor: e-resize;
-    width: 20px;
+    width: 10px;
     height: 100vh;
     right: 0;
 }
@@ -30,6 +30,10 @@
     flex: 1;
 }
 
+.sidebar__notes > a {
+    text-decoration: none;
+}
+
 .sidebar__addNotes {
     cursor: pointer;
 }
@@ -44,7 +48,15 @@
     align-items: center;
     padding: 10px;
     background-color: #161A20;
-    color: gray;
+}
+
+.sidebar__notesHeader .MuiSvgIcon-root {
+    color: #abacae;
+}
+
+.sidebar__notesHeader h4 {
+    color: #C0C3C8;
+    font-style: normal;
 }
 
 .sidebar__header {
@@ -54,10 +66,17 @@
 }
 
 .sidebar__header > h4 {
-    font-weight: 400;
     padding-left: 10px;
 }
 
 .side__cursor:hover {
     cursor: pointer;
+}
+
+.side_active {
+    background-color:  red;
+}
+
+.active {
+    background-color: #373F50;
 }

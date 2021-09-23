@@ -45,8 +45,10 @@ span.detailNoteBtn {
     font-weight: 400;
 }
 
-.sidebarNote > .sidebar__counter {
+
+.sidebar__counter {
     color: gray;
+    font-size: 12px;
 }
 
 .sidebarNote:hover > .sidebar__counter {
