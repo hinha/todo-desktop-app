@@ -9,6 +9,7 @@ function App() {
   return (
     <div id="app" className="app">
       <Sidebar />
+      <div className="react-resizable"></div>
       <NoteGroup />
     </div>
   );
