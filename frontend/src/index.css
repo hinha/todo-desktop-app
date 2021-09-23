@@ -31,3 +31,13 @@ code {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.f-100 {
+ font-weight: 100; 
+}
+.f-200 {
+  font-weight: 200; 
+}
+.f-300 {
+  font-weight: 300; 
+}

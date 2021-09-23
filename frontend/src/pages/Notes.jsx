@@ -1,14 +1,14 @@
 import React from "react";
 
-import "../../assets/css/note.css";
-import NoteHeader from "./NoteHeader";
+import "../assets/css/note.css";
+import NoteHeader from "../components/notes/NoteHeader";
 
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
-const NoteGroup = () => {
+const Notes = () => {
   return (
     <div className="note__card">
-      <NoteHeader />
+      <NoteHeader title="All Notes" />
       <div className="note_header__search">
         <SearchOutlinedIcon />
         <input placeholder="Search" />
@@ -17,4 +17,4 @@ const NoteGroup = () => {
   );
 };
 
-export default NoteGroup;
+export default Notes;

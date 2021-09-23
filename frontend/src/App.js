@@ -1,16 +1,21 @@
 import React from "react";
-// import logo from "./logo.png";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/sidebar/Sidebar";
-import NoteGroup from "./components/notes/Note";
-// import HelloWorld from "./components/HelloWorld";
+import Notes from "./pages/Notes";
+import Trash from "./pages/Trash";
 
 function App() {
   return (
     <div id="app" className="app">
-      <Sidebar />
-      <div className="react-resizable"></div>
-      <NoteGroup />
+      <Router>
+        <Sidebar />
+
+        <Switch>
+          <Route exact path="/" component={Notes} />
+          <Route exact path="/trash" component={Trash} />
+        </Switch>
+      </Router>
     </div>
   );
 }

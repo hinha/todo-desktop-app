@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Resizable } from "react-resizable";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -21,58 +22,65 @@ const Sidebar = () => {
   };
 
   return (
-    <Resizable
-      width={widthSidebar}
-      height={0}
-      onResize={onResize}
-      minConstraints={[200, 200]}
-      maxConstraints={[600, 300]}
-    >
-      <div
-        className="sidebar noselect"
-        style={{ flexBasis: `${widthSidebar}px` }}
+    <>
+      <Resizable
+        width={widthSidebar}
+        height={0}
+        onResize={onResize}
+        minConstraints={[200, 200]}
+        maxConstraints={[600, 300]}
       >
-        <div className="sidebar__top">
-          <h3>Username</h3>
-          <ExpandMoreIcon />
-        </div>
-
-        <div className="sidebar__notes">
-          <div className="sidebar__notesHeader side__cursor">
-            <div className="sidebar__header">
-              <DescriptionOutlinedIcon />
-              <h4>All Notes</h4>
-            </div>
-            <span className="sidebar__counter">3</span>
-          </div>
-          <div className="sidebar__notesHeader">
-            <div className="sidebar__header">
-              <CollectionsBookmarkOutlinedIcon />
-              <h4>Notebooks</h4>
-            </div>
-            <AddCircleOutlineRoundedIcon className="sidebar__addNotes" />
+        <div
+          className="sidebar noselect"
+          style={{ flexBasis: `${widthSidebar}px` }}
+        >
+          <div className="sidebar__top">
+            <h3>Username</h3>
+            <ExpandMoreIcon />
           </div>
 
-          <div className="sidebar__notesList">
-            <SidebarNote />
-            <SidebarNote />
-          </div>
-          <div className="sidebar__notesHeader side__cursor">
-            <div className="sidebar__header">
-              <DeleteOutlinedIcon />
-              <h4>Trash</h4>
+          <div className="sidebar__notes">
+            <NavLink className="sidebar__notesHeader side__cursor" exact to="/">
+              <div className="sidebar__header">
+                <DescriptionOutlinedIcon />
+                <h4 className="f-400">All Notes</h4>
+              </div>
+              <span className="sidebar__counter">3</span>
+            </NavLink>
+            <div className="sidebar__notesHeader">
+              <div className="sidebar__header">
+                <CollectionsBookmarkOutlinedIcon />
+                <h4 className="f-300">Notebooks</h4>
+              </div>
+              <AddCircleOutlineRoundedIcon className="sidebar__addNotes" />
             </div>
-          </div>
-          <div className="sidebar__notesHeader">
-            <div className="sidebar__header">
-              <ListAltRoundedIcon />
-              <h4>Status</h4>
+
+            <div className="sidebar__notesList">
+              <SidebarNote />
+              <SidebarNote />
             </div>
-            <ExpandMoreOutlinedIcon className="sidebar__addNotes" />
+            <NavLink
+              exact
+              to="/trash"
+              className="sidebar__notesHeader side__cursor"
+            >
+              <div className="sidebar__header">
+                <DeleteOutlinedIcon />
+                <h4 className="f-400">Trash</h4>
+              </div>
+            </NavLink>
+            <div className="sidebar__notesHeader">
+              <div className="sidebar__header">
+                <ListAltRoundedIcon />
+                <h4 className="f-300">Status</h4>
+              </div>
+              <ExpandMoreOutlinedIcon className="sidebar__addNotes" />
+            </div>
           </div>
         </div>
-      </div>
-    </Resizable>
+      </Resizable>
+      <div className="react-resizable"></div>
+    </>
   );
 };
 
