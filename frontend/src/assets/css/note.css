@@ -1,0 +1,58 @@
+.note__card {
+    padding: 10px;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    flex: 0.2;
+}
+
+.note__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: gray;   
+    margin-bottom: 8px; 
+}
+
+
+.note_header__center {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.note_header__left > .note_header__icon {
+    display: flex;
+    align-items: center;
+}
+
+.note_header__left > .MuiSvgIcon-root {
+    cursor: pointer;
+}
+.note_header__left > .MuiSvgIcon-root:hover {
+    color: #3689e6;
+}
+
+
+.note_header__right > .MuiSvgIcon-root {
+    cursor: pointer;
+}
+
+.note_header__right > .MuiSvgIcon-root:hover {
+    color: #3689e6;
+}
+
+.note_header__search {
+    display: flex;
+    align-items: center;
+    color: #d4d4d4;
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.note_header__search > input {
+    background-color: transparent;
+    outline-width: 0;
+    color: black;
+    border: none;
+}

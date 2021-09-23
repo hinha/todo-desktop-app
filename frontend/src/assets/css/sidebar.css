@@ -1,0 +1,50 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 0.25;
+    height: 100vh;
+    background-color: #0e141f;
+}
+
+.sidebar__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #0e141f;
+    color: white;
+    border-bottom: 3px solid #26282c;
+}
+
+.sidebar__notes {
+    flex: 1;
+}
+
+.sidebar__addNotes {
+    cursor: pointer;
+}
+
+.sidebar__addNotes:hover {
+    color: white;
+}
+
+.sidebar__notesHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #0e141f;
+    color: gray;
+}
+
+.sidebar__header {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+}
+
+.sidebar__header > h4 {
+    font-weight: 400;
+    padding-left: 10px;
+}
+

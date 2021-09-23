@@ -1,0 +1,54 @@
+
+span.detailNoteBtn {
+    display: none;
+    align-items: center;
+
+    padding: 4px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    width: 58px;
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+}
+
+.detailNoteBtn:hover {
+    color: white;
+    border-color: white;
+}
+
+.sidebarNote {
+    cursor: pointer;
+    /* margin-left: 34px; */
+    padding-left: 34px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebarNote:hover > h4 + span.detailNoteBtn {
+    display: block;
+}
+
+
+.sidebarNote > h4 {
+    height: auto;
+    display: flex;
+    padding-left: 18px;
+    align-items: center;
+    background-color: #0e141f;
+    color: gray;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.sidebarNote > .sidebar__counter {
+    color: gray;
+}
+
+.sidebarNote:hover > .sidebar__counter {
+    display: none;
+}
