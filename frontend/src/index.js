@@ -11,11 +11,11 @@ import * as Wails from "@wailsapp/runtime";
 
 Wails.Init(() => {
   ReactDOM.render(
-    <React.StrictMode>
+    <React.Fragment>
       <Provider store={store}>
         <App />
       </Provider>
-    </React.StrictMode>,
+    </React.Fragment>,
     document.getElementById("app")
   );
 });
