@@ -89,8 +89,12 @@
 }
 
 .note__body > span {
+    font-size: 12px
+}
+
+.note__body > .note__update {
     color: #2E91F8;
-    font-size: 12px;
+    margin-right: 6px;
 }
 
 .note__body_title {
@@ -100,5 +104,15 @@
 
 .note__body_title > .MuiSvgIcon-root {
     margin-right: 8px;
+}
+
+.note__category {
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+    color: #4d4d4d;
+    padding: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-right: 6px;
 }
 
