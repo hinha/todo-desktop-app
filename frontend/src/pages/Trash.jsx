@@ -35,8 +35,9 @@ const Trash = () => {
 
           <NoteBody
             title="Contoh 1"
-            description="lorem"
-            updateSpan="1 days"
+            shortText="lorem"
+            updateSpan={0}
+            categories={["c1"]}
             icon={<PauseCircleOutlineOutlinedIcon className="hold-icon" />}
           />
         </div>

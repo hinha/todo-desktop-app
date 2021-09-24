@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../assets/css/note.css";
 import NoteHeader from "../components/notes/NoteHeader";
@@ -7,10 +7,48 @@ import NoteBody from "../components/notes/NoteBody";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import PauseCircleOutlineOutlinedIcon from "@material-ui/icons/PauseCircleOutlineOutlined";
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
+import AdjustRoundedIcon from "@material-ui/icons/AdjustRounded";
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import { Resizable } from "react-resizable";
+import { dummyNoteList } from "../dummy/note";
 
 const Notes = () => {
   const [widthSidebar, setWidthSidebar] = useState(400);
+  const [getDummyNote, setDummyNote] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      let noteData = [];
+      dummyNoteList.forEach((value) => {
+        let iconState = null;
+        switch (value.iconStatus) {
+          case "active":
+            iconState = <AdjustRoundedIcon />;
+            break;
+          case "hold":
+            iconState = (
+              <PauseCircleOutlineOutlinedIcon className="hold-icon" />
+            );
+            break;
+          case "complete":
+            iconState = <CheckCircleRoundedIcon className="complete-icon" />;
+            break;
+          case "dropped":
+            iconState = <CancelRoundedIcon />;
+            break;
+          default:
+            iconState = null;
+            break;
+        }
+        noteData.push({ ...value, ...{ icon: iconState } });
+      });
+      setDummyNote(noteData);
+    }
+
+    return () => (mounted = false);
+  }, []);
 
   const onResize = (event, { size }) => {
     setWidthSidebar(size.width);
@@ -34,18 +72,18 @@ const Notes = () => {
             </div>
           </div>
 
-          <NoteBody
-            title="Contoh 1"
-            description="lorem"
-            updateSpan="1 days"
-            icon={<PauseCircleOutlineOutlinedIcon className="hold-icon" />}
-          />
-          <NoteBody
-            title="Contoh 2"
-            description="lorem"
-            updateSpan="1 days"
-            icon={<CheckCircleRoundedIcon className="complete-icon" />}
-          />
+          {getDummyNote.map((val, index) => {
+            return (
+              <NoteBody
+                key={index}
+                title={val.title}
+                shortText={val.shortText}
+                updateSpan={val.update_at}
+                categories={val.categories}
+                icon={val.icon}
+              />
+            );
+          })}
         </div>
       </Resizable>
       <div className="react-resizable"></div>
