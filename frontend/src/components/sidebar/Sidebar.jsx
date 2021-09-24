@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Resizable } from "react-resizable";
+import { makeStyles } from "@material-ui/core/styles";
+
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+} from "@material-ui/core";
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
@@ -15,7 +24,18 @@ import "../../assets/css/sidebar.css";
 import SidebarNote from "../sidebar/SidebarNote";
 
 const Sidebar = () => {
-  const [widthSidebar, setWidthSidebar] = useState(200);
+  const classes = useStyles();
+
+  const [widthSidebar, setWidthSidebar] = useState(260);
+  const [openBox, setOpenBox] = useState(false);
+
+  const handleOpen = () => {
+    setOpenBox(true);
+  };
+
+  const handleClose = () => {
+    setOpenBox(false);
+  };
 
   const onResize = (event, { size }) => {
     setWidthSidebar(size.width);
@@ -27,7 +47,7 @@ const Sidebar = () => {
         width={widthSidebar}
         height={0}
         onResize={onResize}
-        minConstraints={[200, 200]}
+        minConstraints={[244, 200]}
         maxConstraints={[600, 300]}
       >
         <div
@@ -52,12 +72,25 @@ const Sidebar = () => {
                 <CollectionsBookmarkOutlinedIcon />
                 <h4 className="f-300">Notebooks</h4>
               </div>
-              <AddCircleOutlineRoundedIcon className="sidebar__addNotes" />
+              <AddCircleOutlineRoundedIcon
+                className="sidebar__addNotes"
+                onClick={handleOpen}
+              />
             </div>
 
             <div className="sidebar__notesList">
-              <SidebarNote />
-              <SidebarNote />
+              <SidebarNote
+                widthSidebar={widthSidebar}
+                subMenuText={"First Notebook"}
+              />
+              <SidebarNote
+                widthSidebar={widthSidebar}
+                subMenuText={"First Notebook Lecture"}
+              />
+              <SidebarNote
+                widthSidebar={widthSidebar}
+                subMenuText={"First Notebook Lecture Notebook Lecture"}
+              />
             </div>
             <NavLink
               exact
@@ -79,9 +112,41 @@ const Sidebar = () => {
           </div>
         </div>
       </Resizable>
+
       <div className="react-resizable"></div>
+      <Dialog open={openBox} onClose={handleClose} maxWidth="lg">
+        <div className="dialog_header">
+          <CollectionsBookmarkOutlinedIcon />
+          <h2 className="dialog_header_title">Add New Notebook</h2>
+        </div>
+        <DialogContent className="dialog_content">
+          <form noValidate autoComplete="off">
+            <TextField
+              id="outlined-basic"
+              label="Enter notebook name"
+              variant="outlined"
+              fullWidth
+              InputProps={{
+                className: classes.input,
+              }}
+            />
+          </form>
+        </DialogContent>
+        <DialogActions className="dialog_footer">
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Create</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
 export default Sidebar;
+
+const useStyles = makeStyles(() => ({
+  paper: { minWidth: "500px" },
+
+  input: {
+    color: "black",
+  },
+}));
