@@ -17,7 +17,7 @@ const BlueOnGreenTooltip = withStyles({
   },
 })(Tooltip);
 
-const SidebarNote = ({ widthSidebar, subMenuText = "" }) => {
+export const SidebarNote = ({ widthSidebar, subMenuText = "" }) => {
   return (
     <div className="sidebarNote">
       <div className="sidebarNote_text">
@@ -34,4 +34,19 @@ const SidebarNote = ({ widthSidebar, subMenuText = "" }) => {
   );
 };
 
-export default SidebarNote;
+export const SidebarCategory = (props) => {
+  const { icon, label, counterStatus } = props;
+  return (
+    <div className="sidebarStatus">
+      <div className="sidebarNote_text flex-center">
+        {icon}
+        <h4>{label}</h4>
+      </div>
+
+      <div className="sidebarNote_text_hidden">
+        <span className="detailNoteBtn">Detail →</span>
+        <div className="sidebar__counter_hover">{counterStatus}</div>
+      </div>
+    </div>
+  );
+};

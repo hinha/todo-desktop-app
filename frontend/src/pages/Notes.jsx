@@ -72,18 +72,29 @@ const Notes = () => {
             </div>
           </div>
 
-          {getDummyNote.map((val, index) => {
-            return (
-              <NoteBody
-                key={index}
-                title={val.title}
-                shortText={val.shortText}
-                updateSpan={val.update_at}
-                categories={val.categories}
-                icon={val.icon}
-              />
-            );
-          })}
+          {/* style="overflow-y: scroll; height:400px;" */}
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                overflowY: "scroll",
+                height: "100vh",
+                overflow: "auto",
+              }}
+            >
+              {getDummyNote.map((val, index) => {
+                return (
+                  <NoteBody
+                    key={index}
+                    title={val.title}
+                    shortText={val.shortText}
+                    updateSpan={val.update_at}
+                    categories={val.categories}
+                    icon={val.icon}
+                  />
+                );
+              })}
+            </div>
+          </div>
         </div>
       </Resizable>
       <div className="react-resizable"></div>

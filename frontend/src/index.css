@@ -17,6 +17,19 @@ code {
 }
 
 
+.white-200 {
+  color: #abacae;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.jsspace {
+  justify-content: space-between;
+}
+
 .sidebar__counter {
   padding-right: 5px;
 }
@@ -42,9 +55,24 @@ code {
   font-weight: 300; 
 }
 
+.ml-1 {
+  margin-left: 8px;
+}
+
+.mr-1 {
+  margin-right: 8px;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
 .complete-icon {
   color: #4caf50
 }
 .hold-icon {
   color: #ffc107
+}
+.dropped-icon {
+  color: #A53540;
 }

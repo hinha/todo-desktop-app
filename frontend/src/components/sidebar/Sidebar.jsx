@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Resizable } from "react-resizable";
 import { makeStyles } from "@material-ui/core/styles";
+// import UnopDropdown from "unop-react-dropdown";
 
 import {
   Button,
@@ -11,6 +12,8 @@ import {
   DialogContent,
 } from "@material-ui/core";
 
+import LocalOfferRoundedIcon from "@material-ui/icons/LocalOfferRounded";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 import CollectionsBookmarkOutlinedIcon from "@material-ui/icons/CollectionsBookmarkOutlined";
@@ -18,16 +21,24 @@ import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import ListAltRoundedIcon from "@material-ui/icons/ListAltRounded";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
+import ArchiveSharpIcon from "@material-ui/icons/ArchiveSharp";
+import PauseCircleOutlineOutlinedIcon from "@material-ui/icons/PauseCircleOutlineOutlined";
+import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
+import AlbumSharpIcon from "@material-ui/icons/AlbumSharp";
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 
 import "../../assets/css/sidebar.css";
 
-import SidebarNote from "../sidebar/SidebarNote";
+import { SidebarNote, SidebarCategory } from "../sidebar/SidebarNote";
+// import SidebarStatus from "./SidebarStatus";
 
 const Sidebar = () => {
   const classes = useStyles();
 
   const [widthSidebar, setWidthSidebar] = useState(260);
   const [openBox, setOpenBox] = useState(false);
+  const [openDropdownStatus, setOpenDropdownStatus] = useState("block");
+  const [openDropdownTags, setOpenDropdownTags] = useState("block");
 
   const handleOpen = () => {
     setOpenBox(true);
@@ -39,6 +50,22 @@ const Sidebar = () => {
 
   const onResize = (event, { size }) => {
     setWidthSidebar(size.width);
+  };
+
+  const dropdownstatus = () => {
+    if (openDropdownStatus === "block") {
+      setOpenDropdownStatus("none");
+    } else {
+      setOpenDropdownStatus("block");
+    }
+  };
+
+  const dropdownTags = () => {
+    if (openDropdownTags === "block") {
+      setOpenDropdownTags("none");
+    } else {
+      setOpenDropdownTags("block");
+    }
   };
 
   return (
@@ -59,55 +86,155 @@ const Sidebar = () => {
             <ExpandMoreIcon />
           </div>
 
+          {/* sidebar notes */}
           <div className="sidebar__notes">
-            <NavLink className="sidebar__notesHeader side__cursor" exact to="/">
-              <div className="sidebar__header">
-                <DescriptionOutlinedIcon />
-                <h4 className="f-400">All Notes</h4>
-              </div>
-              <span className="sidebar__counter">3</span>
-            </NavLink>
-            <div className="sidebar__notesHeader">
-              <div className="sidebar__header">
-                <CollectionsBookmarkOutlinedIcon />
-                <h4 className="f-300">Notebooks</h4>
-              </div>
-              <AddCircleOutlineRoundedIcon
-                className="sidebar__addNotes"
-                onClick={handleOpen}
-              />
-            </div>
+            <div className="l-navbar" id="nav-bar">
+              <nav className="nav">
+                <div style={{ overflow: "hidden" }}>
+                  <div
+                    className="nav_list"
+                    style={{
+                      overflowY: "scroll",
+                      height: "100vh",
+                      overflow: "auto",
+                    }}
+                  >
+                    <NavLink exact to="/" className="nav_link jsspace">
+                      <div className="flex-center">
+                        <DescriptionOutlinedIcon className="mr-1" />
+                        <h4 className="f-400">All Notes</h4>
+                      </div>
+                      <span className="sidebar__counter mr-2">3</span>
+                    </NavLink>
+                    <div className="nav_link jsspace">
+                      <div className="flex-center">
+                        <CollectionsBookmarkOutlinedIcon className="mr-1" />
+                        <h4 className="f-200">Notebooks</h4>
+                      </div>
+                      <AddCircleOutlineRoundedIcon
+                        className="sidebar__addNotes mr-2"
+                        onClick={handleOpen}
+                      />
+                    </div>
+                    <NavLink to="/notebooks" className="nav_link_sub">
+                      <div className="sidebar__notesList">
+                        <SidebarNote
+                          widthSidebar={widthSidebar}
+                          subMenuText={"First Notebook"}
+                        />
+                        <SidebarNote
+                          widthSidebar={widthSidebar}
+                          subMenuText={"First Notebook Lecture"}
+                        />
+                        <SidebarNote
+                          widthSidebar={widthSidebar}
+                          subMenuText={
+                            "First Notebook Lecture Notebook Lecture"
+                          }
+                        />
+                      </div>
+                    </NavLink>
+                    {/* Trash */}
+                    <NavLink
+                      exact
+                      to="/trash"
+                      className="nav_link side__cursor mr-1"
+                    >
+                      <div className="flex-center">
+                        <DeleteOutlinedIcon className="mr-1" />
+                        <h4 className="f-400">Trash</h4>
+                      </div>
+                    </NavLink>
+                    {/* End Trash */}
 
-            <div className="sidebar__notesList">
-              <SidebarNote
-                widthSidebar={widthSidebar}
-                subMenuText={"First Notebook"}
-              />
-              <SidebarNote
-                widthSidebar={widthSidebar}
-                subMenuText={"First Notebook Lecture"}
-              />
-              <SidebarNote
-                widthSidebar={widthSidebar}
-                subMenuText={"First Notebook Lecture Notebook Lecture"}
-              />
-            </div>
-            <NavLink
-              exact
-              to="/trash"
-              className="sidebar__notesHeader side__cursor"
-            >
-              <div className="sidebar__header">
-                <DeleteOutlinedIcon />
-                <h4 className="f-400">Trash</h4>
-              </div>
-            </NavLink>
-            <div className="sidebar__notesHeader">
-              <div className="sidebar__header">
-                <ListAltRoundedIcon />
-                <h4 className="f-300">Status</h4>
-              </div>
-              <ExpandMoreOutlinedIcon className="sidebar__addNotes" />
+                    {/* Status */}
+                    <div className="nav_link jsspace">
+                      <div className="flex-center">
+                        <ListAltRoundedIcon className="mr-1" />
+                        <h4 className="f-200">Status</h4>
+                      </div>
+                      <ExpandMoreOutlinedIcon
+                        className="sidebar-down sidebar__addNotes mr-2"
+                        onClick={dropdownstatus}
+                      />
+                    </div>
+                    {/* End Status */}
+                    {/* Dropdown Status */}
+                    <div style={{ display: openDropdownStatus }}>
+                      <Link to="#">
+                        <SidebarCategory
+                          icon={<AlbumSharpIcon className="white-200" />}
+                          label="Active"
+                          counterStatus="3"
+                        />
+                      </Link>
+                      <Link to="#">
+                        <SidebarCategory
+                          icon={
+                            <PauseCircleOutlineOutlinedIcon className="hold-icon" />
+                          }
+                          label="Hold"
+                          counterStatus="3"
+                        />
+                      </Link>
+
+                      <Link to="#">
+                        <SidebarCategory
+                          icon={
+                            <CheckCircleRoundedIcon className="complete-icon" />
+                          }
+                          label="Complete"
+                          counterStatus="3"
+                        />
+                      </Link>
+                      <Link to="#">
+                        <SidebarCategory
+                          icon={<ArchiveSharpIcon className="white-200" />}
+                          label="Archived"
+                          counterStatus="3"
+                        />
+                      </Link>
+                      <Link to="#">
+                        <SidebarCategory
+                          icon={<CancelRoundedIcon className="dropped-icon" />}
+                          label="Dropped"
+                          counterStatus="3"
+                        />
+                      </Link>
+                    </div>
+                    {/* End Dropdown Status  */}
+                    {/* Tags */}
+                    <div className="nav_link jsspace">
+                      <div className="flex-center">
+                        <LocalOfferRoundedIcon className="mr-1" />
+                        <h4 className="f-200">Tags</h4>
+                      </div>
+                      <ExpandMoreOutlinedIcon
+                        className="sidebar-down sidebar__addNotes mr-2"
+                        onClick={dropdownTags}
+                      />
+                    </div>
+                    {/* End Tags */}
+                    {/* Dropdown Tags */}
+                    <div style={{ display: openDropdownTags }}>
+                      {Array.from(Array(5).keys()).map((index) => {
+                        return (
+                          <Link to={"/" + (index + 1)} key={index}>
+                            <SidebarCategory
+                              icon={
+                                <FiberManualRecordIcon className="white-200" />
+                              }
+                              label={"Tags " + (index + 1)}
+                              counterStatus="3"
+                            />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    {/* End Dropdown Tags */}
+                  </div>
+                </div>
+              </nav>
             </div>
           </div>
         </div>
