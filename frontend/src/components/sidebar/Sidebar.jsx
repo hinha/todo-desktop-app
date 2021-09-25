@@ -82,7 +82,7 @@ const Sidebar = () => {
           style={{ flexBasis: `${widthSidebar}px` }}
         >
           <div className="sidebar__top">
-            <h3>Username</h3>
+            <h3>Keep</h3>
             <ExpandMoreIcon />
           </div>
 

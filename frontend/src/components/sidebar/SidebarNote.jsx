@@ -1,14 +1,9 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
+import { ellipsisText } from "../../utils/ellipsis";
 
 import "../../assets/css/sidebarnote.css";
-
-function calc(width, text = "") {
-  const minWidth = width / 4 - 46;
-  let max = minWidth;
-  return text.length > max ? text.substring(0, max - 3) + "..." : text;
-}
 
 const BlueOnGreenTooltip = withStyles({
   tooltip: {
@@ -22,7 +17,7 @@ export const SidebarNote = ({ widthSidebar, subMenuText = "" }) => {
     <div className="sidebarNote">
       <div className="sidebarNote_text">
         <BlueOnGreenTooltip title={subMenuText}>
-          <h4>{calc(widthSidebar, subMenuText)}</h4>
+          <h4>{ellipsisText(widthSidebar, subMenuText)}</h4>
         </BlueOnGreenTooltip>
       </div>
 

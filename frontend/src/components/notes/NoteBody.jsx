@@ -1,13 +1,21 @@
 import React from "react";
+import { ellipsisText } from "../../utils/ellipsis";
 
-const NoteBody = ({ title, icon, shortText, updateSpan, categories = [] }) => {
+const NoteBody = ({
+  resizeWindow,
+  title,
+  icon,
+  shortText,
+  updateSpan,
+  categories = [],
+}) => {
   return (
     <div className="note__body noselect">
       <div className="note__body_title">
         {icon}
         <h4>{title}</h4>
       </div>
-      <p>{shortText}</p>
+      <p>{ellipsisText(resizeWindow, shortText, 49)}</p>
 
       <span className="note__update">{ago(updateSpan)}</span>
       {categories.map((value, index) => {

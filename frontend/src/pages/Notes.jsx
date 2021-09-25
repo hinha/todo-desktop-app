@@ -84,6 +84,7 @@ const Notes = () => {
               {getDummyNote.map((val, index) => {
                 return (
                   <NoteBody
+                    resizeWindow={widthSidebar}
                     key={index}
                     title={val.title}
                     shortText={val.shortText}
