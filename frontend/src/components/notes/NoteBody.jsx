@@ -36,7 +36,7 @@ function ago(val = 1632000000) {
       second: 60,
       minute: 60,
       hour: 24,
-      days: 7,
+      day: 7,
       week: 4.35,
       month: 12,
       year: 10000,

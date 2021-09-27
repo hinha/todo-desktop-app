@@ -36,7 +36,7 @@ const Notes = () => {
             iconState = <CheckCircleRoundedIcon className="complete-icon" />;
             break;
           case "dropped":
-            iconState = <CancelRoundedIcon />;
+            iconState = <CancelRoundedIcon className="dropped-icon" />;
             break;
           default:
             iconState = null;
@@ -72,7 +72,6 @@ const Notes = () => {
             </div>
           </div>
 
-          {/* style="overflow-y: scroll; height:400px;" */}
           <div style={{ overflow: "hidden" }}>
             <div
               style={{
