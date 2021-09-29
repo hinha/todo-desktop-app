@@ -68,11 +68,11 @@ code {
 }
 
 .complete-icon {
-  color: #4caf50
+  color: #4caf50 !important;
 }
 .hold-icon {
-  color: #ffc107
+  color: #ffc107 !important;
 }
 .dropped-icon {
-  color: #A53540;
+  color: #A53540 !important;
 }

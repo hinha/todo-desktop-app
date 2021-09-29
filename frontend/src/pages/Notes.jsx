@@ -20,6 +20,15 @@ const Notes = () => {
     let mounted = true;
 
     if (mounted) {
+      // example
+      // window.backend.noteBookHandler
+      //   .Basic()
+      //   .then((result) => {
+      //     console.log(result, "noteBookHandler");
+      //   })
+      //   .catch((e) => {
+      //     console.error(e);
+      //   });
       let noteData = [];
       dummyNoteList.forEach((value) => {
         let iconState = null;
