@@ -3,9 +3,20 @@ package main
 import (
 	_ "embed"
 	"fmt"
+	"os"
 	"time"
 
+	_ "github.com/go-sql-driver/mysql"
+	log "github.com/sirupsen/logrus"
 	"github.com/wailsapp/wails"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	gormLogger "gorm.io/gorm/logger"
+
+	"github.com/hinha/todo-desktop-app/backend/domain"
+	_noteBookRepo "github.com/hinha/todo-desktop-app/backend/note/repository/mysql"
+	_noteBookService "github.com/hinha/todo-desktop-app/backend/note/service"
+	"github.com/hinha/todo-desktop-app/backend/server"
 )
 
 func basic() string {
@@ -20,28 +31,58 @@ var css string
 
 func main() {
 
-	app := wails.CreateApp(&wails.AppConfig{
-		Width:  1024,
-		Height: 768,
-		Title:  "todo-desktop-app",
-		JS:     js,
-		CSS:    css,
-		// Colour: "#131313",
+	var (
+		//appSecret = envString("APP_SECRET", "secret")
+		dbUser = envString("DB_USER", "user")
+		dbPass = envString("DB_PASS", "password")
+		dbName = envString("DB_NAME", "admin")
+		dbHost = envString("DB_HOST", "127.0.0.1")
+	)
+
+	logger := log.New()
+	logger.Formatter = new(log.TextFormatter)
+	logger.Formatter.(*log.TextFormatter).DisableColors = true
+	logger.Formatter.(*log.TextFormatter).FullTimestamp = true
+	logger.Level = log.TraceLevel
+	logger.WithField("ts", logger.WithTime(time.Now()))
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		Logger: gormLogger.Default.LogMode(gormLogger.Silent),
+	})
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	err = db.AutoMigrate(&domain.User{}, &domain.Notebook{}, &domain.Note{}, &domain.Category{}, &domain.NoteStatus{})
+	fmt.Println(err)
+
+	// Repository
+	noteBookRepo := _noteBookRepo.New(db)
+
+	// Service/Uses case
+	noteBookService := _noteBookService.NewNoteBookService(noteBookRepo)
+	noteBookService = _noteBookService.NewNotebookLogger(logger.WithField("component", "notebook"), noteBookService)
+
+	// Serve
+	srv := server.New(&wails.AppConfig{
+		Width:     1024,
+		Height:    768,
+		Title:     "Keep",
+		JS:        js,
+		CSS:       css,
 		Colour:    "#ffffff",
 		Resizable: true,
-		MinWidth:  480,
+		MinWidth:  680,
 		MinHeight: 560,
-	})
-	app.Bind(basic)
-	app.Run()
+	}, noteBookService)
+
+	srv.Run()
 }
 
-type MyStruct struct{}
-
-func (m *MyStruct) WailsInit(runtime *wails.Runtime) error {
-	// runtime.Window.
-	t := time.Now()
-	message := fmt.Sprintf("I was initialised at %s", t.String())
-	runtime.Events.Emit("initialised", message)
-	return nil
+func envString(env, fallback string) string {
+	e := os.Getenv(env)
+	if e == "" {
+		return fallback
+	}
+	return e
 }
