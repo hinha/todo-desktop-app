@@ -53,8 +53,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	err = db.AutoMigrate(&domain.User{}, &domain.Notebook{}, &domain.Note{}, &domain.Category{}, &domain.NoteStatus{})
-	fmt.Println(err)
+	if err := db.AutoMigrate(&domain.User{}, &domain.Notebook{}, &domain.Note{}, &domain.Category{}, &domain.NoteStatus{}); err != nil {
+		panic(err)
+	}
 
 	// Repository
 	noteBookRepo := _noteBookRepo.New(db)
