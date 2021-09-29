@@ -20,6 +20,15 @@ const Notes = () => {
     let mounted = true;
 
     if (mounted) {
+      // example
+      // window.backend.noteBookHandler
+      //   .Basic()
+      //   .then((result) => {
+      //     console.log(result, "noteBookHandler");
+      //   })
+      //   .catch((e) => {
+      //     console.error(e);
+      //   });
       let noteData = [];
       dummyNoteList.forEach((value) => {
         let iconState = null;
@@ -36,7 +45,7 @@ const Notes = () => {
             iconState = <CheckCircleRoundedIcon className="complete-icon" />;
             break;
           case "dropped":
-            iconState = <CancelRoundedIcon />;
+            iconState = <CancelRoundedIcon className="dropped-icon" />;
             break;
           default:
             iconState = null;
@@ -72,7 +81,6 @@ const Notes = () => {
             </div>
           </div>
 
-          {/* style="overflow-y: scroll; height:400px;" */}
           <div style={{ overflow: "hidden" }}>
             <div
               style={{
