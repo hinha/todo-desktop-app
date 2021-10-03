@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Resizable } from "react-resizable";
 import { makeStyles } from "@material-ui/core/styles";
-// import UnopDropdown from "unop-react-dropdown";
+
+import { useDB, useFind } from "react-pouchdb";
 
 import {
   Button,
@@ -40,6 +41,20 @@ const Sidebar = () => {
   const [openDropdownStatus, setOpenDropdownStatus] = useState("block");
   const [openDropdownTags, setOpenDropdownTags] = useState("block");
 
+  const { post } = useDB();
+  const docs = useFind({
+    selector: {},
+  });
+
+  useEffect(() => {
+    // let mounted = true;
+    // if (mounted) {
+    // }
+    // return () => (mounted = false);
+  }, []);
+
+  console.log(docs.length);
+
   const handleOpen = () => {
     setOpenBox(true);
   };
@@ -53,6 +68,7 @@ const Sidebar = () => {
   };
 
   const dropdownstatus = () => {
+    post({ tanggal: Date.now() });
     if (openDropdownStatus === "block") {
       setOpenDropdownStatus("none");
     } else {

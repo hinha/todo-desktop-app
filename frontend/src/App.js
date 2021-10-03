@@ -1,23 +1,40 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { PouchDB } from "react-pouchdb";
+
 import "./App.css";
 import MainEditor from "./components/editor/Main";
 import Sidebar from "./components/sidebar/Sidebar";
-import Notes from "./pages/Notes";
-import Trash from "./pages/Trash";
+import MainBooks from "./components/books/Main";
 
 function App() {
   return (
-    <div id="app" className="app">
-      <Router>
-        <Sidebar />
-        <Switch>
-          <Route exact path="/" component={Notes} />
-          <Route exact path="/trash" component={Trash} />
-        </Switch>
-        <MainEditor />
-      </Router>
-    </div>
+    <Suspense fallback="loading...">
+      <div id="app" className="app">
+        <PouchDB name="todo">
+          <Router>
+            <Sidebar />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(props) => (
+                  <MainBooks {...props} notes bookTitle="All Notes" />
+                )}
+              />
+              <Route
+                exact
+                path="/trash"
+                render={(props) => (
+                  <MainBooks {...props} trash bookTitle="Trash" />
+                )}
+              />
+            </Switch>
+            <MainEditor />
+          </Router>
+        </PouchDB>
+      </div>
+    </Suspense>
   );
 }
 
